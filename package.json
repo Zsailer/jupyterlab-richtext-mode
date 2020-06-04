@@ -26,9 +26,15 @@
     "url": "https://github.com/jupytercalpoly/jupyterlab-richtext-mode.git"
   },
   "scripts": {
-    "build": "tsc",
-    "clean": "rimraf lib && rimraf tsconfig.tsbuildinfo",
-    "prepare": "npm run clean && npm run build",
+    "build": "jlpm run build:lib",
+    "build:lib": "tsc",
+    "build:all": "jlpm run build:labextension",
+    "clean": "jlpm run clean:lib",
+    "clean:lib": "rimraf lib tsconfig.tsbuildinfo",
+    "clean:all": "jlpm run clean:lib && jlpm run clean:labextension",
+    "eslint": "eslint . --ext .ts,.tsx --fix",
+    "eslint:check": "eslint . --ext .ts,.tsx",
+    "prepare": "jlpm run clean && jlpm run build",
     "watch": "tsc -w"
   },
   "dependencies": {
